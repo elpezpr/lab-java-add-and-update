@@ -42,11 +42,13 @@ public class EmployeeController {
     }
 
     @PatchMapping("/doctor/status/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateDoctorStatus(@RequestBody ChangeStatusDTO changeStatusDTO, @PathVariable Long employeeId) {
         employeeService.updateDoctorStatus(employeeId, changeStatusDTO.getStatus());
     }
 
     @PatchMapping("/doctor/department/{employeeId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateEmployeeDepartment(@RequestBody UpdateEmployeeDepartmentDTO updateEmployeeDepartmentDTO, @PathVariable Long employeeId) {
         employeeService.updateDoctorDepartment(employeeId, updateEmployeeDepartmentDTO.getDepartment());
     }

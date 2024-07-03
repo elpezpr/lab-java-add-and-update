@@ -5,6 +5,7 @@ import com.labs.lab_add_and_update.model.Patient;
 import com.labs.lab_add_and_update.service.impl.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -43,11 +44,13 @@ public class PatientController {
     }
 
     @PostMapping("/patient")
+    @ResponseStatus(HttpStatus.CREATED)
     public void addPatient(@RequestBody Patient patient) {
         patientService.addPatient(patient);
     }
 
     @PatchMapping("/patient/{patientId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePatient(@RequestBody UpdatePatientDTO updatePatientDTO, @PathVariable Long patientId) {
         patientService.updatePatient(patientId, updatePatientDTO);
     }
