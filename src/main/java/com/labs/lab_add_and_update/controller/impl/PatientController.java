@@ -3,9 +3,11 @@ package com.labs.lab_add_and_update.controller.impl;
 import com.labs.lab_add_and_update.controller.dto.UpdatePatientDTO;
 import com.labs.lab_add_and_update.model.Patient;
 import com.labs.lab_add_and_update.service.impl.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -51,7 +53,7 @@ public class PatientController {
 
     @PatchMapping("/patient/{patientId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePatient(@RequestBody UpdatePatientDTO updatePatientDTO, @PathVariable Long patientId) {
+    public void updatePatient(@RequestBody @Valid UpdatePatientDTO updatePatientDTO, @PathVariable Long patientId) {
         patientService.updatePatient(patientId, updatePatientDTO);
     }
 }

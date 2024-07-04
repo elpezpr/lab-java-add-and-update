@@ -4,6 +4,7 @@ import com.labs.lab_add_and_update.controller.dto.ChangeStatusDTO;
 import com.labs.lab_add_and_update.controller.dto.UpdateEmployeeDepartmentDTO;
 import com.labs.lab_add_and_update.model.Employee;
 import com.labs.lab_add_and_update.service.impl.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,19 +38,19 @@ public class EmployeeController {
 
     @PostMapping("/doctor")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDoctor(@RequestBody Employee employee) {
+    public void addDoctor(@RequestBody @Valid Employee employee) {
         employeeService.addDoctor(employee);
     }
 
     @PatchMapping("/doctor/status/{employeeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateDoctorStatus(@RequestBody ChangeStatusDTO changeStatusDTO, @PathVariable Long employeeId) {
+    public void updateDoctorStatus(@RequestBody @Valid ChangeStatusDTO changeStatusDTO, @PathVariable Long employeeId) {
         employeeService.updateDoctorStatus(employeeId, changeStatusDTO.getStatus());
     }
 
     @PatchMapping("/doctor/department/{employeeId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateEmployeeDepartment(@RequestBody UpdateEmployeeDepartmentDTO updateEmployeeDepartmentDTO, @PathVariable Long employeeId) {
+    public void updateEmployeeDepartment(@RequestBody @Valid UpdateEmployeeDepartmentDTO updateEmployeeDepartmentDTO, @PathVariable Long employeeId) {
         employeeService.updateDoctorDepartment(employeeId, updateEmployeeDepartmentDTO.getDepartment());
     }
 }
